@@ -1,0 +1,26 @@
+{% extends "app_feria/padre1.html" %}
+
+
+
+{% block titulo %}
+
+<div>
+    
+    <h1 style="color:rgb(0, 9, 4) ;">
+        Ingrese lo que desea buscar:                  
+    </h1>
+    
+
+    <button style="background-color:black; border-color: forestgreen">
+        <a href="{% url 'Buscar Jeans' %}">Buscar Jeans</a>
+    </button>
+    <button style="background-color:black; border-color: forestgreen">
+        <a href="{% url 'Buscar Remera' %}">Buscar Remera</a>
+    </button>
+    <button style="background-color:black; border-color: forestgreen">
+        <a href="{% url 'Buscar Camisa' %}">Buscar Camisa</a>
+    </button>
+    
+</div>
+ 
+{% endblock %}

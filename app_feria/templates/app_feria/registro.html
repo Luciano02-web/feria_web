@@ -1,0 +1,30 @@
+{% extends "app_feria/padre.html" %}
+
+
+{% block titulo %}
+<h2 style="color:rgb(19, 10, 10);">
+Registrate
+</h2>
+{% endblock %}
+
+
+{% block descripcion %}
+
+
+<form action=""method="POST">{% csrf_token %}
+    
+    <h6 style="color:rgb(19, 13, 13);">
+        {{f2.as_p}}
+    </h6>
+
+    
+    <button type="submit">Registrarse</button>
+
+
+
+</form>
+
+
+{% endblock %}
+
+

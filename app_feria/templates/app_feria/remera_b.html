@@ -1,0 +1,93 @@
+{% extends "app_feria/padre2.html" %}
+
+
+{% block titulo %}
+
+<h1>
+    <ol>
+        Esta página mostrará las remeras.
+    </ol>
+</h1>
+
+{% endblock %}
+
+
+{% block descripcion %}
+
+
+<div>
+    <h5>
+        <ol><p>Estás buscando remera para {{busqueda_rem}}</p></ol>
+    </h5>
+    <div class="container text-center">
+        <div class="row">
+            {% for remera in remeras %}
+            <div class="col-sm-6 align-items-center">
+                
+                    <h6>
+
+                        {% if remera.imagen %}
+                        <img src="{{remera.imagen.url}}"style="
+                        width: 500px;
+                        height: 570px;">
+                        {% endif %}
+
+                        <h5>
+                            Codigo: {{remera.codigo}}-- Talle: {{remera.talle}}-- Color: {{remera.color}}
+                        </h5>
+                        <h5>
+                             Para {{remera.genero}}-- Precio: ${{remera.precio}}
+                        </h5>
+                    </h6>
+        
+        
+                    {% if request.user.is_superuser %}
+        
+                    <ol>
+                        <button style="background-color:black; border-color: forestgreen">
+                            <em>
+                                <a href="{% url 'EliminaRemera' remera.codigo %}"> Eliminar Remera</a>
+                            </em>
+                        </button>
+            
+                        <button style="background-color:black; border-color: forestgreen">
+                            <em>
+                                <a href="{% url 'EditarRemera' remera.codigo %}"> Editar Remera</a>
+                            </em>
+                        </button>
+                        <h6>
+                            ----------------------------
+                        </h6>
+                    </ol>
+        
+                    {% else %}
+        
+                    ----------------------------
+        
+                    {% endif %}
+        
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% if request.user.is_superuser %}
+<div>
+        <ol>
+            <button style="background-color:black; border-color: forestgreen">
+                <em>
+                    <a href="{% url 'Crear Remera' %}"> Agregar otra Remera</a>
+                </em>
+            </button>
+        </ol>
+</div>
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}

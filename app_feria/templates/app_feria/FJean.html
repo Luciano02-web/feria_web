@@ -1,0 +1,27 @@
+{% extends "app_feria/padre2.html" %}
+
+
+
+{% block titulo %}
+
+<h1>En esta seccion agregue los datos del jean</h1>
+
+
+<form action = "" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            
+    <table align="center">
+        <p>
+            <div>
+                <h4>Ingrese datos del jean</h4>
+                {{formulario1.as_table}}
+            </div>
+        </p>
+    </table>
+
+                    
+    <button type="submit">enviar</button>
+                    
+</form>
+  
+
+{% endblock %}

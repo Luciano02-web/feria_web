@@ -1,0 +1,99 @@
+{% extends "app_feria/padre2.html" %}
+
+
+{% block titulo %}
+
+<h1>
+    <ol>
+        Esta página mostrará las camisas.
+    </ol>
+</h1>
+
+{% endblock %}
+
+
+{% block descripcion %}
+
+
+<div>
+    <h5>
+        <ol>
+            <p>Estás buscando camisa para {{busqueda_cami}}</p>
+        </ol>
+    </h5>
+    <div class="container text-center">
+        <div class="row">
+            {% for camisa in camisas %}
+            <div class="col-sm-6 align-items-center">
+                
+
+            
+                    <h6>
+                        
+                        {% if camisa.imagen %}
+                        <img src="{{camisa.imagen.url}}"style="
+                        width: 500px;
+                        height: 570px;">
+                        {% endif %}
+                        
+                        <h5>
+                            Codigo: {{camisa.codigo}}-- Talle: {{camisa.talle}}-- Color: {{camisa.color}}
+                        </h5>
+                        <h5>
+                            Para {{camisa.genero}}-- Precio: ${{camisa.precio}}
+                        </h5>
+                    </h6>
+        
+                    {% if request.user.is_superuser %}
+                    
+                    
+                    <ol>
+                        <button style="background-color:black; border-color: forestgreen">
+                            <em>
+                                <a href="{% url 'EliminaCamisa' camisa.genero %}"> Eliminar Camisa</a>
+                            </em>
+                        </button>
+            
+                        <button style="background-color:black; border-color: forestgreen">
+                            <em>
+                                <a href="{% url 'EditarCamisa' camisa.genero %}"> Editar Camisa</a>
+                            </em>
+                        </button>
+                        <h6>
+                            ----------------------------
+                        </h6>
+                    </ol>
+                    {% else %}
+                    <h6>
+                        ----------------------------
+                    </h6>
+        
+                    {% endif %}
+        
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        
+</div>
+
+{% if request.user.is_superuser %}
+<div>
+        <ol>
+            <button style="background-color:black; border-color: forestgreen">
+                <em>
+                    <a href="{% url 'Crear Camisa' %}"> Agregar otra Camisa</a>
+                </em>
+            </button>
+        </ol>
+    </ul>
+</div>
+
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}

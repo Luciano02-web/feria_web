@@ -1,0 +1,25 @@
+{% extends "app_feria/padre1.html" %}
+
+
+
+{% block titulo %}
+
+<h1>En esta seccion vamos a buscar camisas para hombre o para mujer</h1>
+
+
+
+<form action="/app_feria/buscar_cami" method="GET">
+    <p>
+        <div>
+
+            <h6>Ingrese aquí(Hombre/Mujer)</h6>
+            
+            <input type="text" name="genero" id="genero">
+
+            <input type="submit" value="Buscar">
+        </div>
+        
+    </p>
+</form>
+
+{% endblock %}

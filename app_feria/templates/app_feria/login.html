@@ -1,0 +1,30 @@
+{% extends "app_feria/padre.html" %}
+
+
+{% block titulo %}
+<h1 style="color:rgb(26, 18, 18)">
+    Inicio de sesión
+</h1>
+{% endblock %}
+
+
+
+{% block descripcion %}
+
+<form action=""method="POST">{% csrf_token %}
+    <div>
+        <h6 style="color:rgb(21, 16, 16);">
+            {{f1.as_p}}
+        </h6>
+    </div>
+
+    
+    <button type="submit">Iniciar sesion</button>
+
+
+
+</form>
+
+{% endblock %}
+
+

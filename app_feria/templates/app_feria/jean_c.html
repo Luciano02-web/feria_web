@@ -1,0 +1,46 @@
+{% extends "app_feria/padre2.html" %}
+
+
+{% block titulo %}
+
+{% endblock %}
+
+
+{% block descripcion %}
+
+
+
+<div class="container">
+    
+    <ul>
+        {% for je in jean %}
+            
+        <ol>
+            {% if v.imagen %}
+            <img src="{{v.imagen.url}}"style="
+            width: 200px;
+            height: 200px;">
+            {% endif %}
+            Jean: {{codigo}}
+            <h6>
+                Jean: {{je.codigo}}--Talle: {{je.talle}}--Color: {{jean.color}}--Para {{jeans.genero}}--Precio: ${{Jeans.precio}}
+            </h6>
+        </ol>
+        
+        {% endfor %}
+    
+    </ul>
+    
+
+
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+

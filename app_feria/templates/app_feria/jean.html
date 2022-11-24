@@ -1,0 +1,92 @@
+{% extends "app_feria/padre2.html" %}
+
+
+{% block titulo %}
+
+<h1 style="color:rgb(4, 3, 14) ;">
+    <ol>
+        Esta página mostrará los jeans.
+    </ol>
+</h1>
+{% endblock %}
+
+
+{% block descripcion %}
+
+<div class="container text-center">
+    <div class="row">
+        {% for v in fly %}
+        <div class="col-sm-6 align-items-center">
+            
+                
+                <h6>
+                    <a href="jean_c">
+                        {% if v.imagen %}
+                        
+                        <img src="{{v.imagen.url}}"style="
+                        width: 500px;
+                        height: 570px;">
+                        {% endif %}
+                    </a>
+                    
+                    <h5>
+                        Codigo {{v.codigo}}--Talle: {{v.talle}}--Color: {{v.color}}
+                    </h5>
+                    <h5>
+                        Para {{v.genero}}--Precio: ${{v.precio}}
+                    </h5>
+                </h6>
+                        
+                {% if request.user.is_superuser %}
+    
+                <ol>
+                    <button style="background-color:black; border-color: forestgreen">
+                        <em>
+                            <a href="{% url 'EliminaJean' v.codigo %}">Eliminar Jean</a>
+                        </em>
+                    </button>
+                    
+                    <button style="background-color:black; border-color: forestgreen">
+                        <em>
+                            <a href="{% url 'EditaJean' v.codigo %}">Editar Jean</a>
+                        </em>
+                    </button>
+                    <h6>
+                        ----------------------------
+                    </h6>
+                </ol>
+                {% else %}
+    
+                ----------------------------
+    
+                {% endif %}
+    
+            
+        </div>
+    
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+{% if request.user.is_superuser %}
+<div>
+        <ol>
+            <button style="background-color:black; border-color: forestgreen">
+                <em>
+                    <a href="{% url 'Crear Jeans' %}"> Agregar otro Jean</a>
+                </em>
+            </button>
+        </ol>
+</div>
+
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}
