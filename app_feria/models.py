@@ -24,6 +24,7 @@ class Jean(models.Model):
     genero = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)#blank=True
 
+
 class Remera(models.Model):
     def __str__(self):
         return f'Remera: {self.codigo} ----- Talle: {self.talle} ----- Color: {self.color} ----- Precio: {self.precio} ----- Genero: {self.genero}'
@@ -56,7 +57,26 @@ class Campera(models.Model):
     genero = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)#blank=True
 
+class Todo100(models.Model):
+    def __str__(self):
+        return f'Todo %100: {self.codigo} ----- Talle: {self.talle} ----- Color: {self.color} ----- Precio: {self.precio} ----- Genero: {self.genero}'
+    codigo = models.IntegerField()
+    talle = models.CharField(max_length=50)
+    color = models.CharField(max_length=50)
+    precio = models.IntegerField()
+    genero = models.CharField(max_length=50)
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)#blank=True
 
+class Calzado(models.Model):
+    def __str__(self):
+        return f'Calzado: {self.codigo} ----- Talle: {self.talle} ----- Color: {self.color} ----- Precio: {self.precio} ----- Genero: {self.genero}'
+    codigo = models.IntegerField()
+    talle = models.CharField(max_length=50)
+    color = models.CharField(max_length=50)
+    precio = models.IntegerField()
+    genero = models.CharField(max_length=50)
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)#blank=True
+    
 """
 class Avatar(models.Model):
     def __str__(self):

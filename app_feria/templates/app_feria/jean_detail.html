@@ -1,0 +1,73 @@
+{% extends "app_feria/padre2.html" %}
+
+
+{% block titulo %}
+
+{% endblock %}
+
+
+{% block descripcion %}
+
+<div class="container text-center">
+    <div class="row">
+
+        <h6>
+            {% if jean.imagen %}
+                        
+            <img src="{{jean.imagen.url}}"style="
+            width: 530px;
+            height: 600px;">
+            
+            {% endif %}
+            </a>
+            <h5 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;">
+                <ol>
+                    Codigo: {{jean.codigo}}
+                </ol>
+                <ol>
+                    Talle: {{jean.talle}}
+                </ol>
+                <ol>
+                    Color: {{jean.color}}
+                </ol>
+                <ol>
+                    Para {{jean.genero}}
+                </ol>
+                <h2 style="font-family:'Times New Roman', Times, serif ;">
+                    <ol>
+                        <strong>${{jean.precio}}</strong>
+                    </ol>
+                </h2>
+            </h5>
+            
+                    
+        </h6>
+
+    </div>
+
+    <ol>
+        {% if request.user.is_superuser %}
+
+        <button style="background-color:black; border-color: forestgreen">
+            <em>
+                <a href="{% url 'EliminaJean' jean.codigo %}">Eliminar Jean</a>
+            </em>
+        </button>
+                    
+        <button style="background-color:black; border-color: forestgreen">
+            <em>
+                <a href="{% url 'EditaJean' jean.codigo %}">Editar Jean</a>
+            </em>
+        </button>
+                    
+        {% else %}
+        
+        {% endif %}
+    </ol>
+    
+
+</div>
+
+
+
+{% endblock %}

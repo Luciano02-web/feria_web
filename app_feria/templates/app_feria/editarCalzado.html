@@ -1,0 +1,38 @@
+{% extends "app_feria/padre2.html" %}
+
+
+
+{% block titulo %}
+
+<h3>
+    <p>Edite datos de la camisa</p>
+</h3>
+
+{% endblock %}
+
+
+{% block descripcion %}
+
+<form action = "" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            
+    <table align="center" >
+        <p>
+
+
+            <div>
+                {{formulario5.as_table}}
+
+            </div>        
+            
+        </p>
+    </table>
+
+                    
+    <input type="submit" value="ENVIAR">
+                    
+</form>
+
+
+{% endblock %}
+
+

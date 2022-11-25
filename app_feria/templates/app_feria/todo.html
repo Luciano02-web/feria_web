@@ -1,11 +1,11 @@
 {% extends "app_feria/padre2.html" %}
 
 
-{% block titulo %}
 
-<h1 style="color:rgb(4, 3, 14) ;">
+{% block titulo %}
+<h1 style="color:rgb(0, 9, 4) ;">
     <ol>
-        Jeans
+        Todo por $100.
     </ol>
 </h1>
 {% endblock %}
@@ -15,75 +15,76 @@
 
 <div class="container text-center">
     <div class="row">
-        {% for v in fly %}
+        {% for to in todo %}
         <div class="col-sm-6 align-items-center">
-            <div class="card-body">
-                
+            
+
+        
                 <h6>
-                    <a href="{% url 'Detalle' v.id %}">
-                        {% if v.imagen %}
-                        <img src="{{v.imagen.url}}"style="
-                        width: 400px;
-                        height: 470px;">
-                        {% endif %}
-                        
-                    </a>
-                    <h5 style="font-family:'Times New Roman', Times, serif ;">
-                        Codigo {{v.codigo}}
+                    {% if to.imagen %}
+                    <img src="{{to.imagen.url}}"style="
+                    width: 500px;
+                    height: 570px;">
+                    {% endif %}
+                    <h5>
+                        Codigo: {{to.codigo}}--Talle: {{to.talle}}--Color: {{to.color}}
                     </h5>
-                    <h4 style="font-family:'Times New Roman', Times, serif ;">
-                        <strong>${{v.precio}}</strong>
-                    </h4>
-                    
+                    <h5>
+                        Para {{to.genero}}--Precio: ${{to.precio}}
+                    </h5>
                 </h6>
-                        
+                
+        
                 {% if request.user.is_superuser %}
-    
+        
+        
+                <ol>
                     <button style="background-color:black; border-color: forestgreen">
                         <em>
-                            <a href="{% url 'EliminaJean' v.codigo %}">Eliminar Jean</a>
+                            <a href="{% url 'Eliminar todo por 100' to.genero %}"> Eliminar</a>
                         </em>
                     </button>
-                    
+            
                     <button style="background-color:black; border-color: forestgreen">
                         <em>
-                            <a href="{% url 'EditaJean' v.codigo %}">Editar Jean</a>
+                            <a href="{% url 'Editar todo por 100' to.genero %}"> Editar</a>
                         </em>
                     </button>
                     <h6>
                         ----------------------------
                     </h6>
+                </ol>
+        
                 {% else %}
-    
+        
                 ----------------------------
-    
+        
                 {% endif %}
-    
-            </div>
+        
+            
+
         </div>
-    
-
         {% endfor %}
-
     </div>
 
 </div>
-
 
 {% if request.user.is_superuser %}
 <div>
         <ol>
             <button style="background-color:black; border-color: forestgreen">
                 <em>
-                    <a href="{% url 'Crear Jeans' %}"> Agregar otro Jean</a>
+                    <a href="{% url 'Crear todo por 100' %}"> Agregar</a>
                 </em>
             </button>
         </ol>
 </div>
 
+
 {% else %}
 
 {% endif %}
+
 
 
 

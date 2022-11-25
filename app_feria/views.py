@@ -1,5 +1,5 @@
 from unicodedata import decomposition
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from app_feria.models import *
@@ -140,6 +140,11 @@ def editaJean(request, numJean):
         "color": idcodigo.color, "precio": idcodigo.precio, "imagen": idcodigo.imagen, "genero": idcodigo.genero})
     return render(request,"app_feria/editarJean.html", {"formulario1":formulariojean, "idJean": numJean})
 
+
+#DETALLE JEANS
+def jean_detail(request,codigo):
+    jean = get_object_or_404(Jean, pk=codigo)
+    return render(request,'app_feria/jean_detail.html',{'jean':jean})
 
 
 
@@ -373,11 +378,161 @@ def editarUsuario(request):
 def sobrenosotros(request):
     return render(request,'app_feria/sobrenosotros.html')
 
-def jean_c(request):
-    jean = Jean.objects.all()
-    return render(request,'app_feria/jean_c.html',{'jean':jean})
 
 
+############
+# TODO100 #
+############
+
+@login_required
+def todo100(request):
+    return render(request,'app_feria/camisa.html')
+
+
+@login_required
+# CREACION DE TODO100
+def formulariotodo(request):
+    if request.method=="POST":
+        formulariotodo = FormuTodo100(request.POST, request.FILES)
+        if formulariotodo.is_valid():
+            info = formulariotodo.cleaned_data
+            editTodo = Todo100(codigo = info["codigo"], talle = info["talle"], color = info["color"].capitalize(), precio = info["precio"], imagen = info["imagen"], genero = info["genero"].capitalize())
+            editTodo.save()
+            return render(request,"app_feria/inicio.html")
+    else:
+        formulariotodo = FormuTodo100()
+    return render(request,"app_feria/FTodo.html",{"formulario4":formulariotodo})
+
+
+@login_required
+#LEER TODO100
+def leerTodo(request):
+    todo = Todo100.objects.all()
+    contexto = {"todo":todo}
+    return render(request,"app_feria/todo.html",contexto)  
+
+
+@login_required
+#ELIMINAR TODO100
+def eliminaTodo(request, generoTodo):
+    elimTodo= Todo100.objects.get(genero=generoTodo)
+    elimTodo.delete()
+
+    todoElim = Todo100.objects.all()
+    contextoPa = {"todo":todoElim}
+    return render (request, "app_feria/todo.html", contextoPa)
+
+
+@login_required
+#EDITAR TODO100
+def editarTodo(request, generoTodo):
+    genero= Camisa.objects.get(genero=generoTodo)
+
+    if request.method=="POST":
+        formulariotodo = FormuTodo100(request.POST, request.FILES)
+        if formulariotodo.is_valid():
+            
+            info = formulariotodo.cleaned_data
+           
+            genero.codigo = info["codigo"]
+            genero.talle = info["talle"]
+            genero.color = info["color"]
+            genero.precio = info["precio"]
+            genero.genero = info["genero"]
+            genero.imagen = info["imagen"]
+            genero.save()
+            return render(request,"app_feria/inicio.html")
+    else:
+        formulariotodo = FormuTodo100(initial={"codigo":genero.codigo,"talle":genero.talle,
+        "color":genero.color, "precio":genero.precio, "genero":genero.genero, "imagen":genero.imagen})
+    return render(request,"app_feria/editarTodo.html",{"formulario4":formulariotodo, "generoTodo": generoTodo })  
+
+
+
+
+
+############
+# CALZADO #
+############
+
+@login_required
+def calzado(request):
+    return render(request,'app_feria/calzado.html')
+
+
+@login_required
+#CREACION DE Calzado
+def formulariocalzado(request):
+    if request.method=="POST":
+        formulariocalzado = FormuCalzado(request.POST, request.FILES)
+        if formulariocalzado.is_valid():
+            info = formulariocalzado.cleaned_data
+            calzadof = Calzado(codigo = info["codigo"], talle = info["talle"], color = info["color"].capitalize(), precio = info["precio"], imagen = info["imagen"], genero = info["genero"].capitalize())
+            calzadof.save()
+            return render(request,"app_feria/inicio.html")
+    else:
+        formulariocalzado = FormuCalzado()
+    return render(request,"app_feria/FCalzado.html",{"formulario5":formulariocalzado})
+
+
+@login_required
+#BUSQUEDA DE CALZADO
+def busquedaCalzado(request):
+    return render(request,"app_feria/busquedaCalzado.html")
+
+
+@login_required
+def buscar_calza(request):
+    if request.GET["genero"]:
+        busqueda_calza = request.GET["genero"]
+        calzados = Calzado.objects.filter(genero = busqueda_calza.capitalize())#puede ir tambien camada__icontains = busqueda
+        return render(request,"app_feria/calzado_b.html",{"calzados":calzados, "busqueda_calza":busqueda_calza})
+    else:
+        mensaje="No enviaste datos."
+    return HttpResponse(f"Estoy buscando calzado para {busqueda_calza}")
+
+
+@login_required
+#LEER CALZADO
+def leerCalzado(request):
+    calza = Calzado.objects.all()
+    contexto = {"calza":calza}
+    return render(request,"app_feria/calzado.html",contexto)
+
+
+@login_required
+#ELIMINAR CALZADO
+def eliminaCalzado(request, generoCalzado):
+    generoCalza= Calzado.objects.get(codigo=generoCalzado)
+    generoCalza.delete()
+    calzadoElim = Calzado.objects.all()
+    contextoPe = {"calza":calzadoElim}
+    return render (request, "app_feria/calzado.html", contextoPe)
+
+
+@login_required
+#EDITAR CALZADO
+def editarCalzado(request, generoCalzado):
+    codigo= Calzado.objects.get(codigo=generoCalzado)
+
+    if request.method=="POST":
+        formulariocalzado = FormuCalzado(request.POST, request.FILES)
+        if formulariocalzado.is_valid():
+            
+            info = formulariocalzado.cleaned_data
+           
+            codigo.codigo = info["codigo"]
+            codigo.talle = info["talle"]
+            codigo.color = info["color"]
+            codigo.precio = info["precio"]
+            codigo.genero = info["genero"]
+            codigo.imagen = info["imagen"]
+            codigo.save()
+            return render(request,"app_feria/inicio.html")
+    else:
+        formulariocalzado = FormuCalzado(initial={"codigo":codigo.codigo,"talle":codigo.talle,
+        "color":codigo.color, "precio":codigo.precio, "genero":codigo.genero, "imagen":codigo.imagen})
+    return render(request,"app_feria/editarCalzado.html",{"formulario5":formulariocalzado, "generoCalzado": generoCalzado })  
 
 
 

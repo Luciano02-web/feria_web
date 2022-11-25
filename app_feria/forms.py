@@ -52,24 +52,24 @@ class FormuJean(forms.Form):
 
 
 class FormuJean(forms.Form):
-    imagen = forms.ImageField()#blank=True
-    codigo = forms.IntegerField()
-    talle = forms.CharField(max_length=50)
-    color = forms.CharField(max_length=50)
-    genero = forms.CharField(max_length=50)
-    precio = forms.IntegerField()
+    imagen = forms.ImageField(required=False)
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
     class Meta:
 
         model = Imagen
         fields = ["imagen"]
 
 class FormuRemera(forms.Form):
-    imagen = forms.ImageField()#blank=True
-    codigo = forms.IntegerField()
-    talle = forms.CharField(max_length=50)
-    color = forms.CharField(max_length=50)
-    genero = forms.CharField(max_length=50)
-    precio = forms.IntegerField()
+    imagen = forms.ImageField(required=False)#blank=True
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
     class Meta:
 
         model = Imagen
@@ -77,29 +77,52 @@ class FormuRemera(forms.Form):
 
 
 class FormuCamisa(forms.Form):
-    imagen = forms.ImageField()#blank=True
-    codigo = forms.IntegerField()
-    talle = forms.CharField(max_length=50)
-    color = forms.CharField(max_length=50)
-    genero = forms.CharField(max_length=50)
-    precio = forms.IntegerField()
+    imagen = forms.ImageField(required=False)
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
     class Meta:
 
         model = Imagen
         fields = ["imagen"]
 
 class FormuCampera(forms.Form):
-    imagen = forms.ImageField()#blank=True
-    codigo = forms.IntegerField()
-    talle = forms.CharField(max_length=50)
-    color = forms.CharField(max_length=50)
-    genero = forms.CharField(max_length=50)
-    precio = forms.IntegerField()
+    imagen = forms.ImageField(required=False)
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
     class Meta:
 
         model = Imagen
         fields = ["imagen"]
 
+class FormuTodo100(forms.Form):
+    imagen = forms.ImageField(required=False)
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
+    class Meta:
+
+        model = Imagen
+        fields = ["imagen"]
+
+class FormuCalzado(forms.Form):
+    imagen = forms.ImageField(required=False)
+    codigo = forms.IntegerField(required=False)
+    talle = forms.CharField(max_length=50, required=False)
+    color = forms.CharField(max_length=50, required=False)
+    genero = forms.CharField(max_length=50, required=False)
+    precio = forms.IntegerField(required=False)
+    class Meta:
+
+        model = Imagen
+        fields = ["imagen"]
 """
 class FormuPasajero(forms.Form):
     nombre = forms.CharField(max_length=50)
